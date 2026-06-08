@@ -50,7 +50,7 @@ void main() {
         expectMetrics(
           RGTextStyles.display,
           size: 72,
-          height: 1.0,
+          height: 1,
           weight: FontWeight.w700,
           spacing: -1.44,
         );

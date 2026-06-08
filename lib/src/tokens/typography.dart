@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'colors.dart';
+import 'package:rg_design_system/src/tokens/colors.dart';
 
 /// Typographic scale for the RG Design System.
 ///
@@ -32,10 +32,10 @@ abstract final class RGTextStyles {
 
   // MARK: - Display
 
-  /// Hero numbers and oversized statement headlines. Use once per view, at most.
+  /// Hero numbers and oversized statement headlines. Use once per view.
   static final TextStyle display = _base.copyWith(
     fontSize: 72,
-    height: 1.0,
+    height: 1,
     fontWeight: FontWeight.w700,
     letterSpacing: -1.44,
   );
