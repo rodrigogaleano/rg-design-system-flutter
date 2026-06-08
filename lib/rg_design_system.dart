@@ -4,3 +4,4 @@
 library;
 
 export 'src/tokens/colors.dart';
+export 'src/tokens/typography.dart';
