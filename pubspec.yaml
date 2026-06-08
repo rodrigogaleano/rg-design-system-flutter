@@ -1,0 +1,19 @@
+name: rg_design_system
+description: "A personal Flutter design system: tokens, themes, and reusable widgets."
+version: 0.0.1
+homepage: https://github.com/rodrigogaleano/rg-design-system-flutter
+
+environment:
+  sdk: ^3.12.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
