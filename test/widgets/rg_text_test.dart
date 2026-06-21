@@ -71,6 +71,29 @@ void main() {
         );
         expect(text.style!.color, RGColors.error);
       });
+
+      testWidgets('keeps a color carried by style over the mode', (
+        tester,
+      ) async {
+        final text = await pumpText(
+          tester,
+          RGText.body('x', style: const TextStyle(color: RGColors.error)),
+          theme: RGTheme.dark,
+        );
+        expect(text.style!.color, RGColors.error);
+      });
+
+      testWidgets('lets an explicit color win over style', (tester) async {
+        final text = await pumpText(
+          tester,
+          RGText.body(
+            'x',
+            color: RGColors.white,
+            style: const TextStyle(color: RGColors.error),
+          ),
+        );
+        expect(text.style!.color, RGColors.white);
+      });
     });
 
     group('style override', () {

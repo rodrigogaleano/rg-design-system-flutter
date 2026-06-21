@@ -1,0 +1,23 @@
+name: rg_design_system_widgetbook
+description: "Widgetbook catalog for the RG Design System."
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ^3.12.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  rg_design_system:
+    path: ../
+  widgetbook: ^3.24.0
+  widgetbook_annotation: ^3.11.0
+
+dev_dependencies:
+  build_runner: ^2.4.0
+  very_good_analysis: ^10.2.0
+  widgetbook_generator: ^3.11.0
+
+flutter:
+  uses-material-design: true

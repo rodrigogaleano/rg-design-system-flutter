@@ -166,15 +166,16 @@ class RGText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Resolve color last so the default (or override) always wins over the
-    // black ink baked into the token.
-    final resolved = _baseStyle.merge(style).copyWith(
-      color: color ?? Theme.of(context).colorScheme.onSurface,
-    );
+    final merged = _baseStyle.merge(style);
+
+    // Resolve ink explicitly so the token's baked-in black never leaks through:
+    // an explicit [color] wins, then any color from [style], then the surface.
+    final ink =
+        color ?? style?.color ?? Theme.of(context).colorScheme.onSurface;
 
     return Text(
       data,
-      style: resolved,
+      style: merged.copyWith(color: ink),
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
