@@ -16,16 +16,20 @@ Widget buildRGTextDisplay(BuildContext context) => RGText.display(
 // MARK: - Headings
 
 @widgetbook.UseCase(name: 'H1', type: RGText)
-Widget buildRGTextH1(BuildContext context) => RGText.h1(context.knobs.string(label: 'Text', initialValue: 'Heading 1'));
+Widget buildRGTextH1(BuildContext context) =>
+    RGText.h1(context.knobs.string(label: 'Text', initialValue: 'Heading 1'));
 
 @widgetbook.UseCase(name: 'H2', type: RGText)
-Widget buildRGTextH2(BuildContext context) => RGText.h2(context.knobs.string(label: 'Text', initialValue: 'Heading 2'));
+Widget buildRGTextH2(BuildContext context) =>
+    RGText.h2(context.knobs.string(label: 'Text', initialValue: 'Heading 2'));
 
 @widgetbook.UseCase(name: 'H3', type: RGText)
-Widget buildRGTextH3(BuildContext context) => RGText.h3(context.knobs.string(label: 'Text', initialValue: 'Heading 3'));
+Widget buildRGTextH3(BuildContext context) =>
+    RGText.h3(context.knobs.string(label: 'Text', initialValue: 'Heading 3'));
 
 @widgetbook.UseCase(name: 'H4', type: RGText)
-Widget buildRGTextH4(BuildContext context) => RGText.h4(context.knobs.string(label: 'Text', initialValue: 'Heading 4'));
+Widget buildRGTextH4(BuildContext context) =>
+    RGText.h4(context.knobs.string(label: 'Text', initialValue: 'Heading 4'));
 
 // MARK: - Body
 
