@@ -15,6 +15,7 @@ Palette: `#000000` and `#FFFFFF`. Font: Helvetica Neue. Base unit: 4pt.
 - **Tokens:** colors, typography scale, spacing, and border radius
 - **Theme:** light and dark `ThemeData`
 - **Components:** reusable widgets built on top of the tokens
+- **Widgetbook:** visual catalog of every component, see [`widgetbook/`](widgetbook/README.md)
 
 ## Usage
 
