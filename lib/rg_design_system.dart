@@ -9,4 +9,5 @@ export 'src/tokens/colors.dart';
 export 'src/tokens/radius.dart';
 export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
+export 'src/widgets/rg_button.dart';
 export 'src/widgets/rg_text.dart';
