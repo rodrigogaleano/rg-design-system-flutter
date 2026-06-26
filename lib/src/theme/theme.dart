@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:rg_design_system/src/theme/token_extensions.dart';
 import 'package:rg_design_system/src/tokens/colors.dart';
+import 'package:rg_design_system/src/tokens/radius.dart';
+import 'package:rg_design_system/src/tokens/spacing.dart';
 import 'package:rg_design_system/src/tokens/typography.dart';
 
 /// Material themes for the RG Design System.
@@ -33,11 +35,70 @@ abstract final class RGTheme {
       colorScheme: colorScheme,
       textTheme: _textTheme(colorScheme),
       scaffoldBackgroundColor: colorScheme.surface,
+      inputDecorationTheme: _inputDecorationTheme(colorScheme),
       extensions: const <ThemeExtension<dynamic>>[
         RGSpacingTheme.standard(),
         RGRadiusTheme.standard(),
       ],
     );
+  }
+
+  // MARK: - InputDecorationTheme
+
+  /// The DS look for every Material input. Encodes the outlined variant, so a
+  /// bare [TextField] adopts the system without any per-field decoration;
+  /// the filled variant layers its fill and underline on top.
+  static InputDecorationThemeData _inputDecorationTheme(ColorScheme scheme) {
+    final radius = BorderRadius.circular(RGRadius.sm);
+
+    OutlineInputBorder border(Color color, {double width = 1}) =>
+        OutlineInputBorder(
+          borderRadius: radius,
+          borderSide: BorderSide(color: color, width: width),
+        );
+
+    return InputDecorationThemeData(
+      isDense: true,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: RGSpacing.md,
+        vertical: RGSpacing.sm + RGSpacing.xs,
+      ),
+      hintStyle: RGTextStyles.body.copyWith(color: scheme.onSurfaceVariant),
+      helperStyle: RGTextStyles.bodyS.copyWith(color: scheme.onSurfaceVariant),
+      errorStyle: RGTextStyles.bodyS.copyWith(color: scheme.error),
+      labelStyle: _labelInk(RGTextStyles.body, scheme),
+      floatingLabelStyle: _labelInk(RGTextStyles.bodyS, scheme),
+      prefixIconColor: _iconInk(scheme),
+      suffixIconColor: _iconInk(scheme),
+      enabledBorder: border(scheme.outline),
+      focusedBorder: border(scheme.onSurface, width: 2),
+      errorBorder: border(scheme.error),
+      focusedErrorBorder: border(scheme.error, width: 2),
+      disabledBorder: border(scheme.onSurface.withValues(alpha: 0.12)),
+      border: border(scheme.outline),
+    );
+  }
+
+  /// Label ink that follows the disabled, error, and focused states.
+  static TextStyle _labelInk(TextStyle base, ColorScheme scheme) =>
+      WidgetStateTextStyle.resolveWith(
+        (states) => base.copyWith(color: _stateInk(states, scheme)),
+      );
+
+  /// Icon ink, dimmed only while the field is disabled.
+  static Color _iconInk(ColorScheme scheme) => WidgetStateColor.resolveWith(
+    (states) => states.contains(WidgetState.disabled)
+        ? scheme.onSurface.withValues(alpha: 0.38)
+        : scheme.onSurfaceVariant,
+  );
+
+  static Color _stateInk(Set<WidgetState> states, ColorScheme scheme) {
+    if (states.contains(WidgetState.disabled)) {
+      return scheme.onSurface.withValues(alpha: 0.38);
+    }
+    if (states.contains(WidgetState.error)) return scheme.error;
+    if (states.contains(WidgetState.focused)) return scheme.onSurface;
+    return scheme.onSurfaceVariant;
   }
 
   // MARK: - ColorScheme
