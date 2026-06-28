@@ -11,3 +11,4 @@ export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
 export 'src/widgets/rg_button.dart';
 export 'src/widgets/rg_text.dart';
+export 'src/widgets/rg_text_field.dart';
