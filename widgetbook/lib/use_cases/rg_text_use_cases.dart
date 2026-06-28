@@ -3,63 +3,50 @@ import 'package:rg_design_system/rg_design_system.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-// One use case per typography style; the text is editable through a knob
-// and the ink follows the theme selected in the toolbar.
+// A single specimen stacking every style top to bottom of the scale, each
+// labelled with its token name. The sample text is editable through a knob and
+// the ink follows the theme selected in the toolbar.
 
-// MARK: - Display
+@widgetbook.UseCase(name: 'Type scale', type: RGText, path: 'Typography')
+Widget buildRGTextScale(BuildContext context) {
+  final sample = context.knobs.string(
+    label: 'Sample',
+    initialValue: 'Rodrigo Galeano',
+  );
+  final labelInk = Theme.of(context).colorScheme.onSurfaceVariant;
 
-@widgetbook.UseCase(name: 'Display', type: RGText)
-Widget buildRGTextDisplay(BuildContext context) => RGText.display(
-  context.knobs.string(label: 'Text', initialValue: 'Display'),
-);
+  final styles = <(String, Widget)>[
+    ('Display', RGText.display(sample)),
+    ('H1', RGText.h1(sample)),
+    ('H2', RGText.h2(sample)),
+    ('H3', RGText.h3(sample)),
+    ('H4', RGText.h4(sample)),
+    ('BodyL', RGText.bodyL(sample)),
+    ('Body', RGText.body(sample)),
+    ('BodyS', RGText.bodyS(sample)),
+    ('Caption', RGText.caption(sample)),
+    ('Overline', RGText.overline(sample)),
+    ('Micro', RGText.micro(sample)),
+  ];
 
-// MARK: - Headings
-
-@widgetbook.UseCase(name: 'H1', type: RGText)
-Widget buildRGTextH1(BuildContext context) =>
-    RGText.h1(context.knobs.string(label: 'Text', initialValue: 'Heading 1'));
-
-@widgetbook.UseCase(name: 'H2', type: RGText)
-Widget buildRGTextH2(BuildContext context) =>
-    RGText.h2(context.knobs.string(label: 'Text', initialValue: 'Heading 2'));
-
-@widgetbook.UseCase(name: 'H3', type: RGText)
-Widget buildRGTextH3(BuildContext context) =>
-    RGText.h3(context.knobs.string(label: 'Text', initialValue: 'Heading 3'));
-
-@widgetbook.UseCase(name: 'H4', type: RGText)
-Widget buildRGTextH4(BuildContext context) =>
-    RGText.h4(context.knobs.string(label: 'Text', initialValue: 'Heading 4'));
-
-// MARK: - Body
-
-@widgetbook.UseCase(name: 'BodyL', type: RGText)
-Widget buildRGTextBodyL(BuildContext context) => RGText.bodyL(
-  context.knobs.string(label: 'Text', initialValue: 'Large body copy'),
-);
-
-@widgetbook.UseCase(name: 'Body', type: RGText)
-Widget buildRGTextBody(BuildContext context) => RGText.body(
-  context.knobs.string(label: 'Text', initialValue: 'Default body text'),
-);
-
-@widgetbook.UseCase(name: 'BodyS', type: RGText)
-Widget buildRGTextBodyS(BuildContext context) => RGText.bodyS(
-  context.knobs.string(label: 'Text', initialValue: 'Small body copy'),
-);
-
-// MARK: - Supporting
-
-@widgetbook.UseCase(name: 'Caption', type: RGText)
-Widget buildRGTextCaption(BuildContext context) => RGText.caption(
-  context.knobs.string(label: 'Text', initialValue: 'Caption'),
-);
-
-@widgetbook.UseCase(name: 'Overline', type: RGText)
-Widget buildRGTextOverline(BuildContext context) => RGText.overline(
-  context.knobs.string(label: 'Text', initialValue: 'OVERLINE'),
-);
-
-@widgetbook.UseCase(name: 'Micro', type: RGText)
-Widget buildRGTextMicro(BuildContext context) =>
-    RGText.micro(context.knobs.string(label: 'Text', initialValue: 'Micro'));
+  return SingleChildScrollView(
+    padding: const EdgeInsets.all(24),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final (name, text) in styles)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RGText.caption(name, color: labelInk),
+                const SizedBox(height: 4),
+                text,
+              ],
+            ),
+          ),
+      ],
+    ),
+  );
+}
