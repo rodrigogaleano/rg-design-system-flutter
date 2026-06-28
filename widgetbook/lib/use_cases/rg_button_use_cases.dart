@@ -38,7 +38,7 @@ String _label(BuildContext context) =>
 
 // MARK: - Filled
 
-@widgetbook.UseCase(name: 'Filled', type: RGButton)
+@widgetbook.UseCase(name: 'Filled', type: RGButton, path: 'Actions')
 Widget buildRGButtonFilled(BuildContext context) => RGButton.filled(
   _label(context),
   onPressed: _onPressed(context),
@@ -52,7 +52,7 @@ Widget buildRGButtonFilled(BuildContext context) => RGButton.filled(
 
 // MARK: - Tonal
 
-@widgetbook.UseCase(name: 'Tonal', type: RGButton)
+@widgetbook.UseCase(name: 'Tonal', type: RGButton, path: 'Actions')
 Widget buildRGButtonTonal(BuildContext context) => RGButton.tonal(
   _label(context),
   onPressed: _onPressed(context),
@@ -66,7 +66,7 @@ Widget buildRGButtonTonal(BuildContext context) => RGButton.tonal(
 
 // MARK: - Outline
 
-@widgetbook.UseCase(name: 'Outline', type: RGButton)
+@widgetbook.UseCase(name: 'Outline', type: RGButton, path: 'Actions')
 Widget buildRGButtonOutline(BuildContext context) => RGButton.outline(
   _label(context),
   onPressed: _onPressed(context),
@@ -80,7 +80,7 @@ Widget buildRGButtonOutline(BuildContext context) => RGButton.outline(
 
 // MARK: - Text
 
-@widgetbook.UseCase(name: 'Text', type: RGButton)
+@widgetbook.UseCase(name: 'Text', type: RGButton, path: 'Actions')
 Widget buildRGButtonText(BuildContext context) => RGButton.text(
   _label(context),
   onPressed: _onPressed(context),
@@ -94,7 +94,7 @@ Widget buildRGButtonText(BuildContext context) => RGButton.text(
 
 // MARK: - Icon-only
 
-@widgetbook.UseCase(name: 'Icon', type: RGButton)
+@widgetbook.UseCase(name: 'Icon', type: RGButton, path: 'Actions')
 Widget buildRGButtonIcon(BuildContext context) => RGButton.icon(
   icon: Icons.favorite,
   tooltip: context.knobs.string(label: 'Tooltip', initialValue: 'Like'),

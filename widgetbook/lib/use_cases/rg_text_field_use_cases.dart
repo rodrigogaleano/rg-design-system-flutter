@@ -39,7 +39,7 @@ IconData? _suffix(BuildContext context) =>
 
 // MARK: - Outlined
 
-@widgetbook.UseCase(name: 'Outlined', type: RGTextField)
+@widgetbook.UseCase(name: 'Outlined', type: RGTextField, path: 'Inputs')
 Widget buildRGTextFieldOutlined(BuildContext context) {
   final multiline = _multiline(context);
   final suffix = _suffix(context);
@@ -64,7 +64,7 @@ Widget buildRGTextFieldOutlined(BuildContext context) {
 
 // MARK: - Filled
 
-@widgetbook.UseCase(name: 'Filled', type: RGTextField)
+@widgetbook.UseCase(name: 'Filled', type: RGTextField, path: 'Inputs')
 Widget buildRGTextFieldFilled(BuildContext context) {
   final multiline = _multiline(context);
   final suffix = _suffix(context);

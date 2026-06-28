@@ -6,7 +6,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 // Single use case driven by knobs for the label, label position, and the
 // disabled state. Backed by a stateful preview so the toggle flips live.
 
-@widgetbook.UseCase(name: 'Default', type: RGSwitch)
+@widgetbook.UseCase(name: 'Default', type: RGSwitch, path: 'Selection')
 Widget buildRGSwitch(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),

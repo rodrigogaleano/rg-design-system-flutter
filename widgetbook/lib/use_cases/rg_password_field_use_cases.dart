@@ -32,7 +32,7 @@ IconData? _prefix(BuildContext context) =>
 
 // MARK: - Outlined
 
-@widgetbook.UseCase(name: 'Outlined', type: RGPasswordField)
+@widgetbook.UseCase(name: 'Outlined', type: RGPasswordField, path: 'Inputs')
 Widget buildRGPasswordFieldOutlined(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
@@ -49,7 +49,7 @@ Widget buildRGPasswordFieldOutlined(BuildContext context) {
 
 // MARK: - Filled
 
-@widgetbook.UseCase(name: 'Filled', type: RGPasswordField)
+@widgetbook.UseCase(name: 'Filled', type: RGPasswordField, path: 'Inputs')
 Widget buildRGPasswordFieldFilled(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(16),
