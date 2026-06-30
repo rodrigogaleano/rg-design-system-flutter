@@ -1,0 +1,4 @@
+# Declares the `golden` tag so visual regression tests can be run or excluded
+# on their own, e.g. `flutter test --tags golden` or `--exclude-tags golden`.
+tags:
+  golden:

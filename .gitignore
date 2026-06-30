@@ -30,3 +30,6 @@ migrate_working_dir/
 /build/
 /coverage/
 widgetbook/build/
+
+# Golden test mismatch artifacts (kept local, never committed).
+test/**/failures/

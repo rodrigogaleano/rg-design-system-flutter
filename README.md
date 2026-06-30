@@ -34,3 +34,20 @@ Import:
 ```dart
 import 'package:rg_design_system/rg_design_system.dart';
 ```
+
+## Testing
+
+Behaviour is covered by widget tests, and appearance is locked down with
+**golden tests**: each component is rendered into a reference PNG (in light and
+dark) that the suite compares against on every run, so a stray padding or a
+broken state is caught as a visual regression.
+
+```bash
+flutter test                    # runs everything, goldens included
+flutter test --tags golden      # only the golden tests
+flutter test --update-goldens   # regenerate the reference images
+```
+
+Regenerate and commit the goldens whenever a visual change is intentional;
+review the new PNGs in the diff before pushing.
+
