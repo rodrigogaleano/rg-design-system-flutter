@@ -9,13 +9,17 @@ on:
 jobs:
   analyze-and-test:
     runs-on: ubuntu-latest
+    # Pinned Flutter image so the goldens the CI compares against are generated
+    # in the exact same environment. Keep this tag in sync with the Makefile.
+    container:
+      image: ghcr.io/cirruslabs/flutter:3.44.0
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
+      # The container runs as root; mark the checkout as safe so git/flutter
+      # don't bail out with "dubious ownership".
+      - name: Trust workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Install dependencies
         run: flutter pub get
@@ -28,3 +32,11 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+      - name: Upload golden failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures
+          path: 'test/**/failures/'
+          if-no-files-found: ignore
