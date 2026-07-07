@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rg_design_system/rg_design_system.dart';
@@ -22,6 +24,12 @@ final GlobalKey _boundaryKey = GlobalKey();
 
 // MARK: - Test registration
 
+/// The reference PNGs are authored in the pinned Linux image (see the
+/// `Makefile` and the CI workflow); font anti-aliasing differs on other
+/// platforms, so a macOS or Windows run would drift and fail. Skip there
+/// instead: goldens are verified in CI and regenerated with `make goldens`.
+final bool _goldensSupported = Platform.isLinux;
+
 /// Registers a light and a dark golden for [name], building the gallery body
 /// with [builder]. Pass [interact] to drive the tree (taps, reveals) before the
 /// frame is captured. Goldens land in `goldens/<name>.<brightness>.png`.
@@ -32,16 +40,21 @@ void goldenTest(
 }) {
   for (final brightness in Brightness.values) {
     final suffix = brightness == Brightness.light ? 'light' : 'dark';
-    testWidgets('$name ($suffix)', (tester) async {
-      await _pumpGallery(tester, brightness: brightness, builder: builder);
-      await interact?.call(tester);
-      await tester.pump(const Duration(seconds: 1));
+    testWidgets(
+      '$name ($suffix)',
+      (tester) async {
+        await _pumpGallery(tester, brightness: brightness, builder: builder);
+        await interact?.call(tester);
+        await tester.pump(const Duration(seconds: 1));
 
-      await expectLater(
-        find.byKey(_boundaryKey),
-        matchesGoldenFile('goldens/$name.$suffix.png'),
-      );
-    }, tags: 'golden');
+        await expectLater(
+          find.byKey(_boundaryKey),
+          matchesGoldenFile('goldens/$name.$suffix.png'),
+        );
+      },
+      tags: 'golden',
+      skip: !_goldensSupported,
+    );
   }
 }
 

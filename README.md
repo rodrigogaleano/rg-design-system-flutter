@@ -43,11 +43,23 @@ dark) that the suite compares against on every run, so a stray padding or a
 broken state is caught as a visual regression.
 
 ```bash
-flutter test                    # runs everything, goldens included
-flutter test --tags golden      # only the golden tests
-flutter test --update-goldens   # regenerate the reference images
+flutter test    # behaviour tests everywhere; goldens only on Linux (see below)
 ```
 
-Regenerate and commit the goldens whenever a visual change is intentional;
-review the new PNGs in the diff before pushing.
+Golden images are pixel-sensitive to the environment that renders them: font
+anti-aliasing differs between macOS and the Linux CI, which would make goldens
+authored on one fail on the other. Rather than loosen the comparison until it
+stops catching real regressions, the reference PNGs are generated **and**
+verified inside a single pinned Flutter image (`ghcr.io/cirruslabs/flutter`,
+same tag in the `Makefile` and the CI workflow). Same environment on both ends,
+so the diff is deterministic and the goldens stay readable.
+
+Because of that, the golden tests **skip automatically off Linux**, so
+`flutter test` stays green on any machine; they are enforced in CI. Whenever a
+visual change is intentional, regenerate the PNGs in the pinned image and review
+them in the diff before pushing:
+
+```bash
+make goldens    # regenerate inside the pinned Docker image (needs Docker)
+```
 

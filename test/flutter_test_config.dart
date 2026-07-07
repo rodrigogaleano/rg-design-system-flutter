@@ -5,21 +5,18 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Global test setup, picked up automatically for every test under `test/`.
 ///
-/// Installs a golden comparator that tolerates a tiny pixel difference. Text is
-/// already deterministic across machines because `flutter_test` renders every
-/// glyph with its own bundled font; what still drifts between macOS (where the
-/// goldens are authored) and the Linux CI is the anti-aliasing of vector shapes
-/// (borders, the loading spinner, the switch track). The tolerance absorbs that
-/// sub-pixel noise so the build only fails on real visual regressions.
+/// Installs a golden comparator with a small pixel tolerance. Goldens are
+/// authored and verified in one pinned Linux image (see the `Makefile` and
+/// the CI workflow) and only run there, so their rendering is deterministic.
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   final local = goldenFileComparator as LocalFileComparator;
   goldenFileComparator = _TolerantGoldenComparator(local.basedir);
   await testMain();
 }
 
-/// Share of pixels (0..1) allowed to differ before a golden is considered a
-/// regression. 0.5% is enough to swallow cross-platform anti-aliasing without
-/// hiding a real change.
+/// Share of pixels (0..1) allowed to differ before a golden counts as a
+/// regression. Same environment on both ends makes the real diff ~zero; this
+/// only absorbs sub-pixel rasterization noise, not a genuine change.
 const double _tolerance = 0.005;
 
 /// A [LocalFileComparator] that passes when the diff stays under [_tolerance].
