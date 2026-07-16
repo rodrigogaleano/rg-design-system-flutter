@@ -51,6 +51,7 @@ class RGButton extends StatelessWidget {
     super.key,
     this.size = RGButtonSize.medium,
     this.isDestructive = false,
+    this.leading,
     this.leadingIcon,
     this.trailingIcon,
     this.isLoading = false,
@@ -66,6 +67,7 @@ class RGButton extends StatelessWidget {
     super.key,
     this.size = RGButtonSize.medium,
     this.isDestructive = false,
+    this.leading,
     this.leadingIcon,
     this.trailingIcon,
     this.isLoading = false,
@@ -81,6 +83,7 @@ class RGButton extends StatelessWidget {
     super.key,
     this.size = RGButtonSize.medium,
     this.isDestructive = false,
+    this.leading,
     this.leadingIcon,
     this.trailingIcon,
     this.isLoading = false,
@@ -96,6 +99,7 @@ class RGButton extends StatelessWidget {
     super.key,
     this.size = RGButtonSize.medium,
     this.isDestructive = false,
+    this.leading,
     this.leadingIcon,
     this.trailingIcon,
     this.isLoading = false,
@@ -121,6 +125,7 @@ class RGButton extends StatelessWidget {
     this.isDestructive = false,
     this.isLoading = false,
   }) : label = null,
+       leading = null,
        leadingIcon = null,
        trailingIcon = null,
        fullWidth = false;
@@ -139,6 +144,10 @@ class RGButton extends StatelessWidget {
   /// When true, recolors the button from the theme's error token to signal a
   /// dangerous action.
   final bool isDestructive;
+
+  /// Widget shown before the label; takes precedence over [leadingIcon] and
+  /// inherits its color from the button's [IconTheme].
+  final Widget? leading;
 
   /// Icon shown before the label.
   final IconData? leadingIcon;
@@ -217,7 +226,10 @@ class RGButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (leadingIcon != null) ...[
+          if (leading != null) ...[
+            leading!,
+            SizedBox(width: spec.gap),
+          ] else if (leadingIcon != null) ...[
             Icon(leadingIcon, size: spec.iconSize),
             SizedBox(width: spec.gap),
           ],
