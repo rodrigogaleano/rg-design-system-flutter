@@ -246,6 +246,34 @@ void main() {
         expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
       });
 
+      testWidgets('renders a custom leading widget', (tester) async {
+        await pumpButton(
+          tester,
+          RGButton.filled(
+            'x',
+            onPressed: () {},
+            leading: const Icon(Icons.star),
+          ),
+        );
+        expect(find.byIcon(Icons.star), findsOneWidget);
+      });
+
+      testWidgets('leading widget takes precedence over leadingIcon', (
+        tester,
+      ) async {
+        await pumpButton(
+          tester,
+          RGButton.filled(
+            'x',
+            onPressed: () {},
+            leading: const Icon(Icons.star),
+            leadingIcon: Icons.add,
+          ),
+        );
+        expect(find.byIcon(Icons.star), findsOneWidget);
+        expect(find.byIcon(Icons.add), findsNothing);
+      });
+
       testWidgets('icon-only renders the glyph and exposes a tooltip', (
         tester,
       ) async {
