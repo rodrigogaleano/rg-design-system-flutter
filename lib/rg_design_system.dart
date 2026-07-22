@@ -10,6 +10,7 @@ export 'src/tokens/radius.dart';
 export 'src/tokens/spacing.dart';
 export 'src/tokens/typography.dart';
 export 'src/widgets/rg_button.dart';
+export 'src/widgets/rg_checkbox.dart';
 export 'src/widgets/rg_divider.dart';
 export 'src/widgets/rg_password_field.dart';
 export 'src/widgets/rg_social_button.dart';
