@@ -49,8 +49,6 @@ class _SelectPreviewState extends State<_SelectPreview> {
     label: widget.label,
     hint: widget.hint,
     options: _options,
-    onChanged: widget.enabled
-        ? (next) => setState(() => _value = next)
-        : null,
+    onChanged: widget.enabled ? (next) => setState(() => _value = next) : null,
   );
 }

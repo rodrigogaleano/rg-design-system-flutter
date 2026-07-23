@@ -114,8 +114,7 @@ class _RGSelectState<T> extends State<RGSelect<T>> {
               for (final option in widget.options)
                 _optionItem(scheme, option, width),
             ],
-            builder: (context, controller, child) =>
-                _trigger(context, scheme),
+            builder: (context, controller, child) => _trigger(context, scheme),
           ),
         );
 
