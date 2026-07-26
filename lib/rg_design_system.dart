@@ -19,6 +19,7 @@ export 'src/widgets/rg_list_row.dart';
 export 'src/widgets/rg_password_field.dart';
 export 'src/widgets/rg_section_header.dart';
 export 'src/widgets/rg_select.dart';
+export 'src/widgets/rg_sidebar.dart';
 export 'src/widgets/rg_social_button.dart';
 export 'src/widgets/rg_switch.dart';
 export 'src/widgets/rg_text.dart';
