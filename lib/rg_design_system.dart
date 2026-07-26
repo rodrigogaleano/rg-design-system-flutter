@@ -14,6 +14,7 @@ export 'src/widgets/rg_button.dart';
 export 'src/widgets/rg_checkbox.dart';
 export 'src/widgets/rg_dialog.dart';
 export 'src/widgets/rg_divider.dart';
+export 'src/widgets/rg_list_row.dart';
 export 'src/widgets/rg_password_field.dart';
 export 'src/widgets/rg_section_header.dart';
 export 'src/widgets/rg_select.dart';
