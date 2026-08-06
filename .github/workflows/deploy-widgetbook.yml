@@ -3,6 +3,7 @@ name: Deploy Widgetbook
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,7 +15,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The site is a release artifact, so it is only republished when the package
+  # version moves. Run the workflow manually to redeploy without a bump.
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - id: compare
+        name: Compare the package version against the previous commit
+        run: |
+          new=$(grep '^version:' pubspec.yaml)
+          # Empty on the first commit, or if the file did not exist yet; either
+          # way that counts as a change.
+          old=$(git show HEAD~1:pubspec.yaml 2>/dev/null | grep '^version:' || true)
+          if [ "$new" != "$old" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Version changed: '$old' -> '$new'"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Version unchanged ($new), skipping the deploy."
+          fi
+
   deploy:
+    needs: check-version
+    if: needs.check-version.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -35,6 +35,11 @@ Import:
 import 'package:rg_design_system/rg_design_system.dart';
 ```
 
+## Used by
+
+- [**todo-flutter**](https://github.com/rodrigogaleano/todo-flutter), a cross-platform todo app
+- [**weather-flutter**](https://github.com/rodrigogaleano/weather-flutter), a cross-platform weather app powered by Open-Meteo
+
 ## Testing
 
 Behaviour is covered by widget tests, and appearance is locked down with
